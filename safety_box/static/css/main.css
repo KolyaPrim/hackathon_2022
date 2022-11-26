@@ -4,3 +4,7 @@ body {
 .navbar {
     border-bottom:0.5px solid rgba(0,0,0,0.15);
 }
+
+.navbar-greetings-text {
+    margin-right: 0.3rem;
+}
