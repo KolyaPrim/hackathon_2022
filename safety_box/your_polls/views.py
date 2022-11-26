@@ -19,3 +19,6 @@ class PollViewSet(viewsets.ViewSet):
 
     def get_poll_list(self, request):
         return Response(template_name='polls_list.html')
+
+    def create_poll(self, request):
+        return Response(template_name='poll_creating_page.html')

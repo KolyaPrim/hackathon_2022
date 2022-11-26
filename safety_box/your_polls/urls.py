@@ -11,4 +11,5 @@ from .views import PollViewSet
 
 urlpatterns = [
     path('', PollViewSet.as_view({'get': 'get_poll_list'})),
+    path('creating_poll/', PollViewSet.as_view({'get': 'create_poll'})),
 ]
