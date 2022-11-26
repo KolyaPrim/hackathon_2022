@@ -100,21 +100,43 @@ window.submit = function () {
         result['questions'].push(question_obj)
     })
     console.log(result)
+    post(result)
 }
 
 function post(data) {
-    let csrf = $('#csrfmiddlewaretoken')[0].value
+    let csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+    let form_data = new FormData();
+    for (const [key, value] of Object.entries(data)) {
+        form_data.append(key, value);
+    }
+    form_data.append('poll_css', $('#file_input')[0].files[0], data['title.css']);
     $.ajax({
-        url: '',
+        // url: '/save_poll/',
+        // headers: {
+        //     'Content-type': 'application/json',
+        //     'Accept': 'application/json',
+        //     'X-CSRFToken': csrf
+        // },
+        // data: form_data,
+        // files: $('#file_input')[0].files,
+        // type: 'POST',
+        // processData: false,  // tell jQuery not to process the data
+        // contentType: false,
+
+        type: "POST",
+        url: '/save_poll/',
         headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json',
+            // 'Content-type': 'application/json',
+            // 'Accept': 'application/json',
             'X-CSRFToken': csrf
         },
-        method: 'POST',
-        dataType: 'json',
-        success: function (data) {
+        data: form_data,
+        contentType: false,
+        processData: false,
+        cache: false,
 
+        success: function (data) {
+            console.log('success')
         },
         error: function (xhr, errmsg, err) {
             console.log(errmsg)

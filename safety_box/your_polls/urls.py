@@ -13,5 +13,5 @@ urlpatterns = [
     path('', PollViewSet.as_view({'get': 'get_poll_list'})),
     path('poll/<int:poll_id>/', PollViewSet.as_view({'get': 'get_poll'})),
     path('creating_poll/', PollViewSet.as_view({'get': 'create_poll'})),
-    path('save_poll/', PollViewSet.as_view({'get': 'save_poll'})),
+    path('save_poll/', PollViewSet.as_view({'post': 'save_poll'})),
 ]
