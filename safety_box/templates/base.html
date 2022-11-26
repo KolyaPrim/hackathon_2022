@@ -64,16 +64,17 @@
         </form>
     {% endif %}
 </nav>
-<main>
-    {% if user.is_authenticated %}
+
+{% if user.is_authenticated %}
+    <main class="flex-grow-1 d-flex">
         {% block content %}
         {% endblock %}
-    {% endif %}
-</main>
+    </main>
+{% endif %}
 
-<footer class="page-footer font-small bg-light">
-  <div class="footer-copyright text-center py-3">Hackathon 2022 Kotiki
-  </div>
+<footer class="page-footer font-small bg-light mt-4">
+    <div class="footer-copyright text-center py-3">Hackathon 2022 Kotiki
+    </div>
 </footer>
 
 </body>

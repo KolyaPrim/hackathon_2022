@@ -56,3 +56,7 @@ a,a:hover {
     height: 400px;
     overflow: auto;
 }
+
+.custom_iframe {
+    border: none;
+}
