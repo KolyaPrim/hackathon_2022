@@ -8,7 +8,6 @@ a {
 }
 
 .main_space {
-    margin-top: 1rem;
     border-radius: 5px;
     border: 0.5px solid rgba(0, 0, 0, 0.15);
     box-shadow: 7px 7px 13px rgb(0 0 0 / 8%);

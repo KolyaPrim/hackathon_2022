@@ -1,6 +1,9 @@
 body {
-    height: 100%;
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
 }
 .navbar {
     border-bottom:0.5px solid rgba(0,0,0,0.15);
 }
+
