@@ -1,3 +1,4 @@
+{% load socialaccount %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -16,13 +17,16 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<nav></nav>
 
+<h1>My Google OAuth Project </h1>
 
+{% if user.is_authenticated %}
+    {% block content %}
+    {% endblock %}
+{% else %}
+    <a href="{% provider_login_url 'google' %}">Login With Google</a>
+{% endif %}
 
-
-{% block content %}
-{% endblock %}
 <footer>
 
 </footer>
