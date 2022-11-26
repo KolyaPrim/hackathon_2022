@@ -65,13 +65,12 @@
     {% endif %}
 </nav>
 
-{% if user.is_authenticated %}
-    <main class="flex-grow-1 d-flex">
+<main class="flex-grow-1 d-flex">
+    {% if user.is_authenticated %}
         {% block content %}
         {% endblock %}
-    </main>
-{% endif %}
-
+    {% endif %}
+</main>
 <footer class="page-footer font-small bg-light mt-4">
     <div class="footer-copyright text-center py-3">Hackathon 2022 Kotiki
     </div>
