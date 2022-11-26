@@ -63,8 +63,56 @@ class PollViewSet(viewsets.ViewSet):
                         template_name='poll_page.html')
 
     def save_poll(self, request):
-        data = dict(request.data)
-
+        # data = request.data
+        data = {
+            'title': "Великий опрос",
+            'description': "Описание великого опроса",
+            'questions': [
+                {
+                    "text": "Любите ли вы котиков?",
+                    "description": "Все мы любим котиков",
+                    "variants": [
+                        {
+                            "label": "Да",
+                            "type": "radiobutton"
+                        },
+                        {
+                            "label": "Тоже да",
+                            "type": "radiobutton"
+                        }
+                    ]
+                },
+                {
+                    "text": "Каких котиков вы любите?",
+                    "variants": [
+                        {
+                            "label": "Рыжих",
+                            "type": "checkbox"
+                        },
+                        {
+                            "label": "Чёрных",
+                            "type": "checkbox"
+                        },
+                        {
+                            "label": "Белых",
+                            "type": "checkbox"
+                        },
+                        {
+                            "label": "Серых",
+                            "type": "checkbox"
+                        },
+                        {
+                            "label": "Разноцветных",
+                            "type": "checkbox"
+                        },
+                        {
+                            "label": "Сфинксов",
+                            "type": "checkbox"
+                        }
+                    ]
+                }
+            ]
+        }
         poll_obj = Poll(title=data.get('title'), description=data.get('description', ''), author=request.user)
         poll_obj.save()
 

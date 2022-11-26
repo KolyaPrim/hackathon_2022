@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 User = get_user_model()
@@ -10,6 +11,7 @@ class Poll(models.Model):
     css_file = models.FileField(upload_to='polls_styles/', default='')
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
+    token = models.CharField(max_length=200)
 
 
 class Question(models.Model):
@@ -28,4 +30,5 @@ class Variant(models.Model):
 
 class Answer(models.Model):
     variant = models.ForeignKey(Variant, on_delete=models.CASCADE)
+    datetime = models.DateTimeField(auto_now_add=True)
     value = models.TextField()
