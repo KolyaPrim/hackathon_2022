@@ -3,7 +3,7 @@
     border: 1px solid;
 }
 
-input[type="input"] {
+input[type="text"] {
     border-radius: 0.4rem;
     border-width: 0.1rem;
 }

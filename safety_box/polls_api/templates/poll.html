@@ -17,7 +17,8 @@
     <title>{{ pool.title }}</title>
 </head>
 <body>
-    <div class="container">
+    {% csrf_token %}
+    <div class="container" id="inputs_div">
         <div class="row">
             <div class="col">
                 <H1 class="text-center">{{ poll.title }}</H1>
@@ -32,7 +33,7 @@
         {% endif %}
 
         {% for question in poll.questions %}
-            <div class="row">
+            <div id="inputs_container" class="row">
                 <div class="col question mb-3">
                     <div class="row mt-2">
                         <div class="col">
@@ -50,7 +51,7 @@
                         <div class="row">
                             <div class="col">
                                 {% if variant.type == 'radio' or variant.type == 'checkbox' %}
-                                    <input type="{{ variant.type }}" name="{{ variant.name }}" value="{{ variant.value }}">
+                                    <input id="{{ variant.id }}" question_id="{{ question.id }}" poll_id="{{ poll.id }}"  type="{{ variant.type }}" name="{{ variant.name }}" value="{{ variant.value }}">
                                     <label>{{ variant.label }}</label>
                                 {% else %}
                                     <div class="row">
@@ -60,7 +61,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6 mb-3">
-                                            <input class="small-text-input" type="{{ variant.type }}" name="{{ variant.name }}" value="{{ variant.value }}">
+                                            <input id="{{ variant.id }}" question_id="{{ question.id }}" poll_id="{{ poll.id }}" class="small-text-input" type="{{ variant.type }}" name="{{ variant.name }}" value="{{ variant.value }}">
                                         </div>
                                     </div>
                                 {% endif %}
@@ -72,10 +73,18 @@
         {% endfor %}
         <div class="row mb-3">
             <div class="col">
-                <button class="btn btn-primary">Submit</button>
+                <button type="button" id="poll_submit_btn" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div class="container d-none" id="thanks_div">
+        <div class="row">
+            <div class="col">
+                <H1 class="text-center">Thank you for taking the poll!</H1>
             </div>
         </div>
     </div>
 </body>
+<script type="module" src="{% static "js/api/poll.js" %}"></script>
 </html>
 
