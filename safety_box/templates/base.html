@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<script type="module" src="{% static "/jquery/dist/jquery.min.js" %}"></script>
+
+<link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap.min.css" %}">
+<link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap-grid.min.css" %}">
+<link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap-reboot.min.css" %}">
+
+<script type="module" src="{% static "/bootstrap/dist/js/bootstrap.bundle.min.js" %}"></script>
+<script type="module" src="{% static "/bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<nav></nav>
+
+
+
+
+{% block content %}
+{% endblock %}
+<footer>
+
+</footer>
+
+</body>
+</html>
