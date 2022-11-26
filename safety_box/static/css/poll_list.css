@@ -1,8 +1,17 @@
-a,a:hover {
+a, a:hover {
     color: #000 !important;
     text-decoration: none
 }
-
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  /* отображаем курсор в виде руки при наведении; некоторые
+  считают, что необходимо оставлять стрелочный вид для кнопок */
+  cursor: pointer;
+}
 
 .base {
 
@@ -41,7 +50,9 @@ a,a:hover {
 }
 
 .list_item_title {
-    border-bottom: 0.1px solid rgba(0, 0, 0, 0.11);;
+    display: flex;
+    border-bottom: 0.1px solid rgba(0, 0, 0, 0.11);
+    justify-content: space-between;
 }
 
 .list_element {
@@ -57,6 +68,16 @@ a,a:hover {
     overflow: auto;
 }
 
+.iframe_block {
+    margin-top: 2rem;
+}
+
 .custom_iframe {
     border: none;
 }
+
+.controls_btn {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+}
+

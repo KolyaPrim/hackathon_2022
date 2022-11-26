@@ -1,9 +1,15 @@
 {% load static %}
-<a href="/poll/{{ item.id }}/">
-    <div class="list_item">
 
-        <div class="list_item_title">{{ item.title }}</div>
-        <div class="list_item_description">{{ item.description }}</div>
+<div class="list_item" id="poll_{{ item.id }}">
 
+    <div class="list_item_title">{{ item.title }}
+        <div class="controls_div">
+            <a href="/poll/{{ item.id }}/">
+                <button class="controls_btn">Go to poll</button>
+            </a>
+            <button class="controls_btn" onclick="delete_poll({{ item.id }})">Delete</button>
+        </div>
     </div>
-</a>
+    <div class="list_item_description">{{ item.description }}</div>
+
+</div>
