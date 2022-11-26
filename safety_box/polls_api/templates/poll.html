@@ -4,45 +4,78 @@
 <link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap.min.css" %}">
 <link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap-grid.min.css" %}">
 <link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap-reboot.min.css" %}">
-<link rel="stylesheet" href="{% static "css/api/poll.css" %}">
+<link rel="stylesheet" href="{% static "css/api/default.css" %}">
 {% if poll.css_file %}
     <link rel="stylesheet" href="{% static poll.css_file %}">
 {% endif %}
 
 <script type="module" src="{% static "bootstrap/dist/js/bootstrap.bundle.min.js" %}"></script>
 <script type="module" src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
-
-<div class="poll-container">
-    <div class="row">
-        <div class="col">
-            <H1>{{ poll.title }}</H1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <H2>{{ poll.description }}</H2>
-        </div>
-    </div>
-
-    {% for question in poll.questions %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ pool.title }}</title>
+</head>
+<body>
+    <div class="container">
         <div class="row">
             <div class="col">
-                <H3>{{ poll.title }}</H3>
+                <H1 class="text-center">{{ poll.title }}</H1>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <H4>{{ poll.description }}</H4>
-            </div>
-        </div>
-        {% for variant in question.variants %}
+        {% if poll.description %}
             <div class="row">
                 <div class="col">
-                    <label>{{ variant.label }}
-                        <input type="{{ variant.type }}" name="{{ variant.name }}" value="{{ variant.value }}">
-                    </label>
+                    <p>{{ poll.description }}</p>
+                </div>
+            </div>
+        {% endif %}
+
+        {% for question in poll.questions %}
+            <div class="row">
+                <div class="col question mb-3">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <H3>{{ question.title }}</H3>
+                        </div>
+                    </div>
+                    {% if question.description %}
+                        <div class="row">
+                            <div class="col">
+                                <p>{{ question.description }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% for variant in question.variants %}
+                        <div class="row">
+                            <div class="col">
+                                {% if variant.type == 'radio' or variant.type == 'checkbox' %}
+                                    <input type="{{ variant.type }}" name="{{ variant.name }}" value="{{ variant.value }}">
+                                    <label>{{ variant.label }}</label>
+                                {% else %}
+                                    <div class="row">
+                                        <div class="col">
+                                            <label>{{ variant.label }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 mb-3">
+                                            <input class="small-text-input" type="{{ variant.type }}" name="{{ variant.name }}" value="{{ variant.value }}">
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         {% endfor %}
-    {% endfor %}
-</div>
+        <div class="row mb-3">
+            <div class="col">
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

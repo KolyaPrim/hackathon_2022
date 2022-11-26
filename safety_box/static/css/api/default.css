@@ -1,0 +1,13 @@
+.question {
+    border-radius: 15px;
+    border: 1px solid;
+}
+
+input[type="input"] {
+    border-radius: 0.4rem;
+    border-width: 0.1rem;
+}
+
+.small-text-input {
+    width: 100%;
+}

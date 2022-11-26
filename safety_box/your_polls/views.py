@@ -74,7 +74,7 @@ class PollViewSet(viewsets.ViewSet):
 
             for index_v, variant in enumerate(variants):
                 value = ''
-                if variant.get('type') in ('radiobutton', 'checkbox'):
+                if variant.get('type') in ('radio', 'checkbox'):
                     value = index_v
 
                 variant_obj = Variant(label=variant.get("label"), type=variant.get('type'), value=value, name=index_q,
