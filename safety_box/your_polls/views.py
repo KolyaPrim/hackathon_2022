@@ -2,15 +2,18 @@ import datetime
 import logging
 
 import importlib
+import os
+import time
 import traceback
 
 from django.db.models import Q
 from django.http import JsonResponse, Http404
 from django.shortcuts import get_object_or_404, redirect
 from rest_framework import viewsets, permissions
-from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 from rest_framework.request import Request
 from rest_framework.response import Response
+import hashlib
 from .models import *
 
 
@@ -62,58 +65,17 @@ class PollViewSet(viewsets.ViewSet):
         return Response(data={'poll': poll_data},
                         template_name='poll_page.html')
 
+
+class PollsOperatingObjectApi(viewsets.ViewSet):
+    renderer_classes = [JSONRenderer]
+
     def save_poll(self, request):
-        # data = request.data
-        data = {
-            'title': "Великий опрос",
-            'description': "Описание великого опроса",
-            'questions': [
-                {
-                    "text": "Любите ли вы котиков?",
-                    "description": "Все мы любим котиков",
-                    "variants": [
-                        {
-                            "label": "Да",
-                            "type": "radiobutton"
-                        },
-                        {
-                            "label": "Тоже да",
-                            "type": "radiobutton"
-                        }
-                    ]
-                },
-                {
-                    "text": "Каких котиков вы любите?",
-                    "variants": [
-                        {
-                            "label": "Рыжих",
-                            "type": "checkbox"
-                        },
-                        {
-                            "label": "Чёрных",
-                            "type": "checkbox"
-                        },
-                        {
-                            "label": "Белых",
-                            "type": "checkbox"
-                        },
-                        {
-                            "label": "Серых",
-                            "type": "checkbox"
-                        },
-                        {
-                            "label": "Разноцветных",
-                            "type": "checkbox"
-                        },
-                        {
-                            "label": "Сфинксов",
-                            "type": "checkbox"
-                        }
-                    ]
-                }
-            ]
-        }
-        poll_obj = Poll(title=data.get('title'), description=data.get('description', ''), author=request.user)
+        data = request.data
+
+        now = time.time()
+        token = hashlib.md5(str(now).encode('utf-8')).hexdigest()
+
+        poll_obj = Poll(title=data.get('title'), description=data.get('description', ''), token=token, author=request.user)
         poll_obj.save()
 
         questions = data.get('questions')
@@ -135,3 +97,11 @@ class PollViewSet(viewsets.ViewSet):
                 variant_obj.save()
 
         return redirect("/poll/" + str(poll_obj.id) + "/")
+
+    def delete_poll(self, request, poll_id: int):
+        poll: Poll = get_object_or_404(Poll, id=poll_id)
+        if os.path.exists(poll.css_file.path):
+            os.remove(path=poll.css_file.path)
+        poll.delete()
+
+        return JsonResponse({})

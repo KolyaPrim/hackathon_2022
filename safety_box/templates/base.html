@@ -67,6 +67,7 @@
 
 {% if user.is_authenticated %}
     <main class="flex-grow-1 d-flex">
+    {% csrf_token %}
         {% block content %}
         {% endblock %}
     </main>
