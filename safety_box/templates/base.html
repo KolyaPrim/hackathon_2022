@@ -66,13 +66,15 @@
 </nav>
 
 {% if user.is_authenticated %}
-    {% block content %}
-    {% endblock %}
+    <main class="flex-grow-1 d-flex">
+        {% block content %}
+        {% endblock %}
+    </main>
 {% endif %}
 
-<footer class="page-footer font-small bg-light">
-  <div class="footer-copyright text-center py-3">Hackathon 2022 Kotiki
-  </div>
+<footer class="page-footer font-small bg-light mt-4">
+    <div class="footer-copyright text-center py-3">Hackathon 2022 Kotiki
+    </div>
 </footer>
 
 </body>
