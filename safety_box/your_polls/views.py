@@ -18,7 +18,12 @@ class PollViewSet(viewsets.ViewSet):
     renderer_classes = [TemplateHTMLRenderer]
 
     def get_poll_list(self, request):
-        return Response(template_name='polls_list.html')
+        user = request.user
+        queryset = Poll.objects.filter(author_id=user.id)
+        poll_list = [item for item in queryset]
+        return Response(data={'polls': poll_list,
+                              'item_template': 'polls_item.html'},
+                        template_name='polls_list.html')
 
     def create_poll(self, request):
         return Response(template_name='poll_creating_page.html')

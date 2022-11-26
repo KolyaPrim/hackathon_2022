@@ -1,0 +1,58 @@
+a {
+    color: #000 !important;
+    text-decoration: none
+}
+
+.base {
+
+}
+
+.main_space {
+    margin-top: 1rem;
+    border-radius: 5px;
+    border: 0.5px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 7px 7px 13px rgb(0 0 0 / 8%);
+}
+
+.link_custom {
+    margin-left: auto;
+    text-align: center
+}
+
+.list_block {
+    border-radius: 5px;
+    border: 0.5px solid rgba(0, 0, 0, 0.15);
+}
+
+.main_block {
+    margin: 1.5rem;
+}
+
+.list_item {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 0.5px solid rgba(0, 0, 0, 0.15);
+    margin: 1rem 2rem 1rem 1rem;
+}
+
+.list_item_description {
+    margin-left: 2rem;
+    font-size: 0.8rem;
+}
+
+.list_item_title {
+    border-bottom: 0.1px solid rgba(0, 0, 0, 0.11);;
+}
+
+.list_element {
+}
+
+.main_block_btn {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.list_block {
+    height: 400px;
+    overflow: auto;
+}
