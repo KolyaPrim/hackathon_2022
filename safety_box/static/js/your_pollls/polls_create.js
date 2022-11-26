@@ -1,9 +1,8 @@
 window.add_question = function () {
-    let first_question = $('#question_0')
+    let new_question = $('#question_0').clone()
     let questions = $('#questions')
 
     let new_el_id = questions.children().length
-    let new_question = first_question.clone()
     new_question.attr('id', `question_${new_el_id}`)
     questions.append(new_question)
 
@@ -72,7 +71,13 @@ window.submit = function () {
         let question_obj = {}
         let question_id = question.id
         question_obj['text'] = $(`#${question_id} .question_text`)[0].value
-        question_obj['description'] = $(`#${question_id} .description_container textarea`).slice(1,)[0].value
+        try {
+            question_obj['description'] = $(`#${question_id} .description_container textarea`).slice(1,)[0].value
+        }
+        catch (e) {
+            console.log(e)
+        }
+
         question_obj['variants'] = []
 
         $(`#${question_id} .checkbox_container`).children().slice(1,).each(function (v_id, variant) {
@@ -86,7 +91,7 @@ window.submit = function () {
             let rad_id = variant.id
             let radio_obj = {}
             radio_obj['label'] = $(`#${question_id} .radio_container #${rad_id} .label_input`)[0].value
-            radio_obj['type'] = 'radiobutton'
+            radio_obj['type'] = 'radio'
             question_obj['variants'].push(radio_obj)
         })
         $(`#${question_id} .text_container`).children().slice(1,).each(function (v_id, variant) {
@@ -104,42 +109,49 @@ window.submit = function () {
 }
 
 function post(data) {
-    let csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
-    let form_data = new FormData();
-    for (const [key, value] of Object.entries(data)) {
-        form_data.append(key, value);
-    }
-    form_data.append('poll_css', $('#file_input')[0].files[0], data['title.css']);
-    $.ajax({
-        // url: '/save_poll/',
-        // headers: {
-        //     'Content-type': 'application/json',
-        //     'Accept': 'application/json',
-        //     'X-CSRFToken': csrf
-        // },
-        // data: form_data,
-        // files: $('#file_input')[0].files,
-        // type: 'POST',
-        // processData: false,  // tell jQuery not to process the data
-        // contentType: false,
-
-        type: "POST",
-        url: '/save_poll/',
-        headers: {
-            // 'Content-type': 'application/json',
-            // 'Accept': 'application/json',
-            'X-CSRFToken': csrf
-        },
-        data: form_data,
-        contentType: false,
-        processData: false,
-        cache: false,
-
-        success: function (data) {
-            console.log('success')
-        },
-        error: function (xhr, errmsg, err) {
-            console.log(errmsg)
-        }
-    })
+    document.getElementById('poll_create_form').reportValidity()
+    // let csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+    // let form_data = new FormData();
+    // // for (const [key, value] of Object.entries(data)) {
+    // //     form_data.append(key, value);
+    // // }
+    // form_data.append('data', JSON.stringify(data));
+    // for ( let file of $('#file_input')[0].files) {
+    //     form_data.append('poll_css', file, data['title.css']);
+    // }
+    // $.ajax({
+    //     // url: '/save_poll/',
+    //     // headers: {
+    //     //     'Content-type': 'application/json',
+    //     //     'Accept': 'application/json',
+    //     //     'X-CSRFToken': csrf
+    //     // },
+    //     // data: form_data,
+    //     // files: $('#file_input')[0].files,
+    //     // type: 'POST',
+    //     // processData: false,  // tell jQuery not to process the data
+    //     // contentType: false,
+    //
+    //     type: "POST",
+    //     url: '/save_poll/',
+    //     headers: {
+    //         // 'Content-type': 'application/json',
+    //         // 'Accept': 'application/json',
+    //         'X-CSRFToken': csrf
+    //     },
+    //     data: form_data,
+    //     // data: {"inputs_data": JSON.stringify(data),
+    //     // 'files':$('#file_input')[0].files},
+    //     contentType: false,
+    //     processData: false,
+    //     cache: false,
+    //
+    //     success: function (data) {
+    //         console.log('success')
+    //         console.log(data)
+    //     },
+    //     error: function (xhr, errmsg, err) {
+    //         console.log(errmsg)
+    //     }
+    // })
 }

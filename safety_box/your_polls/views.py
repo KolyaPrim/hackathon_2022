@@ -1,4 +1,5 @@
 import datetime
+import json
 import logging
 
 import importlib
@@ -63,8 +64,8 @@ class PollViewSet(viewsets.ViewSet):
                         template_name='poll_page.html')
 
     def save_poll(self, request):
-        data = request.data
-
+        # data = request.data
+        data = json.loads(dict(request.data)['data'][0])
         poll_obj = Poll(title=data.get('title'),
                         description=data.get('description', ''),
                         author=request.user,

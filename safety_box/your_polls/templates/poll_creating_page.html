@@ -5,6 +5,7 @@
 <script type="module" src="{% static 'js/your_pollls/polls_create.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/your_polls/polls_create.css' %}">
 {% csrf_token %}
+<form id="poll_create_form">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8" style="background: #0c5460; height: 200px; margin-top: 40px; border-radius: 15px; display: inherit;">
@@ -48,7 +49,7 @@
 
                         <div class="col mt-3">
                             <label for="usr">Text of your question</label>
-                            <input required type="text" class="form-control question_text" placeholder="... ?" id="usr">
+                            <input type="text" class="form-control question_text" placeholder="... ?" id="usr">
                         </div>
 
                     </div>
@@ -91,7 +92,7 @@
                         <div class="row form-check" style="margin-left: 20px">
                             <div class="col-md-3">
                                 <label class="form-check-label">
-                                    <input disabled type="checkbox" class="form-check-input" value=""><input required class="label_input" placeholder="type in your label" type="text">
+                                    <input disabled type="checkbox" class="form-check-input" value=""><input class="label_input" placeholder="type in your label" type="text">
                                 </label>
                             </div>
                             <div class="col-md-9">
@@ -108,7 +109,7 @@
                         <div class="row form-check" style="margin-left: 20px">
                             <div class="col-md-3">
                                 <label class="form-check-label">
-                                    <input disabled type="radio" class="form-check-input" name="optradio"><input required class="label_input" placeholder="type in your label" type="text">
+                                    <input disabled type="radio" class="form-check-input" name="optradio"><input class="label_input" placeholder="type in your label" type="text">
                                 </label>
                             </div>
                             <div class="col-md-9">
@@ -123,7 +124,7 @@
                     <div id="input_text_0" class="row input_row input_text_field" style="display: none">
                         <div class="row form-check" style="margin-left: 20px">
                             <div class="col-md-3">
-                                <input required class="label_input" placeholder="type in your label" type="text">
+                                <input class="label_input" placeholder="type in your label" type="text">
                             </div>
                             <div class="col-md-9">
                                 <button id="0_text_0" class="btn custom_btn remove_var_btn" onclick="delete_variant(this)">x</button>
@@ -143,4 +144,7 @@
             Submit
         </button>
     </div>
+</form>
+
+
 {% endblock %}
