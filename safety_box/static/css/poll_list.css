@@ -1,7 +1,8 @@
-a {
+a,a:hover {
     color: #000 !important;
     text-decoration: none
 }
+
 
 .base {
 

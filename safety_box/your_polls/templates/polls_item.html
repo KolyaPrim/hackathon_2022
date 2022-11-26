@@ -1,8 +1,9 @@
 {% load static %}
+<a href="/poll/{{ item.id }}/">
+    <div class="list_item">
 
-<div class="list_item">
+        <div class="list_item_title">{{ item.title }}</div>
+        <div class="list_item_description">{{ item.description }}</div>
 
-    <div class="list_item_title">{{ title }}</div>
-        <div class="list_item_description">{{ description }}</div>
-
-</div>
+    </div>
+</a>

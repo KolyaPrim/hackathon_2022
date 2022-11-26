@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ poll.title }} {% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="{% static  'css/poll_list.css' %}">
+
+<h1>Its a poll {{ poll.id }}</h1>
+
+{% endblock %}

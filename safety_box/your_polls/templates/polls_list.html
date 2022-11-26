@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} {{ report.name }} {% endblock %}
+{% block title %} YourPolls {% endblock %}
 {% block content %}
     <link rel="stylesheet" href="{% static  'css/poll_list.css' %}">
 
@@ -28,7 +28,7 @@
                 <div class="col-md-8 list_element">
                     <div class="list_block">
                         {% for item in polls %}
-                            {% include item_template with title=item.title description=item.description %}
+                            {% include item_template with item=item %}
                         {% endfor %}
                     </div>
                 </div>

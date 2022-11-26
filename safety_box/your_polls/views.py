@@ -27,3 +27,8 @@ class PollViewSet(viewsets.ViewSet):
 
     def create_poll(self, request):
         return Response(template_name='poll_creating_page.html')
+
+    def get_poll(self, request, poll_id: int):
+        poll = get_object_or_404(Poll,id=poll_id)
+        return Response(data={'poll': poll},
+                        template_name='poll_page.html')
