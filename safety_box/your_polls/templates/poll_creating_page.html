@@ -1,9 +1,51 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %} {{ report.name }} {% endblock %}
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6" style="background: #0c5460; height: 200px">
+<script type="module" src="{% static 'js/your_pollls/polls_create.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/your_polls/polls_create.css' %}">
 
+    <div class="row justify-content-center">
+        <div class="col-md-8" style="background: #0c5460; height: 200px; margin-top: 40px; border-radius: 15px; display: inherit;">
+            <p style="font-size: xxx-large; color: white; margin: auto;">
+                Create your poll
+            </p>
+        </div>
     </div>
-</div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8" style="margin-left: 100%">
+            <button type="button" class="btn" id="add_button" onclick="add_question()">
+                Add question
+            </button>
+        </div>
+    </div>
+
+    <div id="question_0" class="container form-group question-container">
+        <div class="row">
+            <div class="col-md-10">
+                <label for="usr">Text of your question</label>
+                <input type="text" class="form-control" placeholder="... ?" id="usr">
+
+                <label for="comment">Question description</label>
+                <textarea class="form-control" rows="5" id="comment" placeholder="Make sure the question will be understood correctly..."></textarea>
+            </div>
+
+            <div class="col-md-2" style="margin: auto">
+                <div class="btn-group-vertical">
+                  <button type="button" class="btn custom_btn" onclick="add_radio()">Radio</button>
+                  <button type="button" class="btn custom_btn" onclick="add_checkbox()">CheckBox</button>
+                  <button type="button" class="btn custom_btn" onclick="add_text_field()">Text field</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row checkbox_row">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="">Option 1
+              </label>
+            </div>
+        </div>
+    </div>
 {% endblock %}

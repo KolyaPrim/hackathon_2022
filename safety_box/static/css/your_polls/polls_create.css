@@ -1,0 +1,13 @@
+.question-container .custom_btn {
+    color: #0c5460;
+    border-width: 1px;
+    border-color: #0c5460;
+    margin-top: 0px
+}
+
+#add_button {
+    border-radius: 6px;
+    margin-top: 10px;
+    border-width: 3px;
+    border-color: #0c5460;
+}
