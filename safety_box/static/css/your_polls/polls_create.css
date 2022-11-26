@@ -2,12 +2,33 @@
     color: #0c5460;
     border-width: 1px;
     border-color: #0c5460;
-    margin-top: 0px
+    margin-top: 0px;
 }
 
 #add_button {
     border-radius: 6px;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     border-width: 3px;
     border-color: #0c5460;
+    width: 20rem;
+}
+
+.question-container .input_row {
+    margin-left: 5px;
+    margin-top: 25px;
+}
+
+.question-container .label_input {
+    outline: 0;
+    border-width: 0 0 0.5px;
+    border-color: #0c5460
+}
+
+.question-container {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #0c5460;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 10px
 }
