@@ -64,11 +64,12 @@
         </form>
     {% endif %}
 </nav>
-
-{% if user.is_authenticated %}
-    {% block content %}
-    {% endblock %}
-{% endif %}
+<main>
+    {% if user.is_authenticated %}
+        {% block content %}
+        {% endblock %}
+    {% endif %}
+</main>
 
 <footer class="page-footer font-small bg-light">
   <div class="footer-copyright text-center py-3">Hackathon 2022 Kotiki

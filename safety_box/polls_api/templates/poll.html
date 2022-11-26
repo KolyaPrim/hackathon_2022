@@ -1,3 +1,48 @@
-<div style="width:100%; height:100%; background-color: #0c5460">
+{% load static %}
+<script type="module" src="{% static "jquery/dist/jquery.min.js" %}"></script>
 
+<link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap.min.css" %}">
+<link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap-grid.min.css" %}">
+<link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap-reboot.min.css" %}">
+<link rel="stylesheet" href="{% static "css/api/poll.css" %}">
+{% if poll.css_file %}
+    <link rel="stylesheet" href="{% static poll.css_file %}">
+{% endif %}
+
+<script type="module" src="{% static "bootstrap/dist/js/bootstrap.bundle.min.js" %}"></script>
+<script type="module" src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+<div class="poll-container">
+    <div class="row">
+        <div class="col">
+            <H1>{{ poll.title }}</H1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <H2>{{ poll.description }}</H2>
+        </div>
+    </div>
+
+    {% for question in poll.questions %}
+        <div class="row">
+            <div class="col">
+                <H3>{{ poll.title }}</H3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <H4>{{ poll.description }}</H4>
+            </div>
+        </div>
+        {% for variant in question.variants %}
+            <div class="row">
+                <div class="col">
+                    <label>{{ variant.label }}
+                        <input type="{{ variant.type }}" name="{{ variant.name }}" value="{{ variant.value }}">
+                    </label>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
 </div>

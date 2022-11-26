@@ -29,6 +29,30 @@ class PollViewSet(viewsets.ViewSet):
         return Response(template_name='poll_creating_page.html')
 
     def get_poll(self, request, poll_id: int):
-        poll = get_object_or_404(Poll,id=poll_id)
-        return Response(data={'poll': poll},
+        poll: Poll = get_object_or_404(Poll, id=poll_id)
+        poll_data = {
+            "title": poll.title,
+            "description": poll.description or "",
+            "css_file": poll.css_file.file,
+            "questions": [
+                {
+                    "title": question.title,
+                    "description": question.description or "",
+                    "variants": [
+                        {
+                            "label": variant.label,
+                            "type": variant.type,
+                            "value": variant.value,
+                            "name": variant.name,
+                            "id": variant.id
+                        }
+                        for variant
+                        in Variant.objects.filter(question=question)
+                    ]
+                }
+                for question
+                in Question.objects.filter(poll=poll)
+            ]
+        }
+        return Response(data={'poll': poll_data},
                         template_name='poll_page.html')
