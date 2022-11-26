@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ poll.title }} {% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="{% static  'css/poll_list.css' %}">
+
+    <div class="list_item">
+
+        <div class="list_item_title">{{ poll.title }}</div>
+        <div class="list_item_description">{{ poll.description }}</div>
+
+    </div>
+    <div class="container flex-grow-1 d-flex">
+        <iframe src="/api/{{ poll.id }}/" class="container-fluid custom_iframe">
+        </iframe>
+    </div>
+
+{% endblock %}

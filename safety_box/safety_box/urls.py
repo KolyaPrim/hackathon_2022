@@ -21,6 +21,7 @@ urlpatterns = [
     path('', include('your_polls.urls')),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
+    path('api/', include('polls_api.urls')),
     *([
           re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
           re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),
