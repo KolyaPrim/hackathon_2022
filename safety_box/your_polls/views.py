@@ -30,10 +30,15 @@ class PollViewSet(viewsets.ViewSet):
 
     def get_poll(self, request, poll_id: int):
         poll: Poll = get_object_or_404(Poll, id=poll_id)
+        try:
+            css_file = poll.css_file.file
+        except:
+            css_file = None
         poll_data = {
+            'id': poll.id,
             "title": poll.title,
             "description": poll.description or "",
-            "css_file": poll.css_file.file,
+            "css_file": css_file,
             "questions": [
                 {
                     "title": question.title,
