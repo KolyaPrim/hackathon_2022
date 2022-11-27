@@ -27,11 +27,13 @@ class AnalyticsPlotter:
         questions_data = {
             question.title: [
                 {
+                    'id': variant.id,
                     'label':variant.label,
                     'count': len(Answer.objects.filter(variant=variant))
                 }
                 for variant
                 in Variant.objects.filter(question=question)
+                if variant.type != 'text'
             ]
             for question
             in questions
@@ -40,13 +42,7 @@ class AnalyticsPlotter:
             dash.html.Div([
                 dash.html.H1(question_title),
                 dash.dcc.Graph(
-                    figure=px.bar(
-                        pd.DataFrame(
-                            variants_data
-                        ),
-                        x='label',
-                        y='count'
-                    )
+                    figure=self.generate_question_bar(variants_data)
                 )
             ])
             for question_title, variants_data
@@ -64,3 +60,15 @@ class AnalyticsPlotter:
         ])
 
         return name
+
+    def generate_question_bar(self, variants_data):
+        fig = px.bar(
+                        pd.DataFrame(
+                            variants_data
+                        ),
+                        x='id',
+                        y='count',
+                        text="label"
+                    )
+        fig.update_xaxes(visible=False, showticklabels=False)
+        return fig
