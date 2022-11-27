@@ -8,9 +8,23 @@
 .add_button {
     border-radius: 6px;
     /*margin-top: 10px;*/
-    border-width: 3px;
+    border-width: 2px;
     border-color: #0c5460;
-    width: 20rem;
+    background-color: turquoise;
+    width: 8rem;
+}
+
+#head_container {
+    background-color: turquoise;
+    height: 150px;
+    margin-top: 40px;
+    border-radius: 15px;
+    display: inherit;
+}
+
+#poll_create_form .dropdown-menu {
+    overflow-y: scroll;
+    max-height: 15rem;
 }
 
 .question-container .input_row {
@@ -24,6 +38,14 @@
     border-color: #0c5460
 }
 
+.dropdown .label_input{
+    outline: 0;
+    border-width: 0 0 0.5px;
+    border-color: #0c5460;
+    background-color: turquoise;
+    color: #343a40;
+}
+
 .question-container {
     border-style: solid;
     border-width: 1px;
@@ -31,4 +53,9 @@
     border-radius: 10px;
     margin-top: 10px;
     padding: 10px
+}
+
+.dropdown-item:active {
+    background-color: turquoise;
+    color: #343a40;
 }
