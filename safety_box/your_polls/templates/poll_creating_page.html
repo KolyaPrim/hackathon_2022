@@ -5,30 +5,54 @@
 <link rel="stylesheet" href="{% static 'css/your_polls/polls_create.css' %}">
 {% csrf_token %}
 <form id="poll_create_form">
+
     <div class="container">
+        <div></div>
         <div class="row justify-content-center">
-            <div class="col-md-8" style="background: #0c5460; height: 200px; margin-top: 40px; border-radius: 15px; display: inherit;">
-                <p style="font-size: xxx-large; color: white; margin: auto;">
+            <div class="col-md-8" id="head_container">
+                <p style="font-size: xxx-large; color: #343a40; margin: auto;">
                     Create your poll
                 </p>
             </div>
         </div>
 
         <div class="row form-group">
-            <label for="poll_name">Poll name</label>
-            <input required type="text" class="form-control" id="poll_name">
+            <div class="col-md-10">
+                <label for="poll_name">Poll name</label>
+                <input placeholder="..." required type="text" class="form-control" id="poll_name">
+            </div>
+
+            <div class="col-md-2 align-items-end" style="display: flex">
+
+                <div class="dropdown">
+                    <button class="btn custom_btn dropdown-toggle" style="background-color: turquoise; padding-right: 0.4rem; padding-left: 0.4rem;" type="button" data-toggle="dropdown" aria-expanded="false">
+                        <input id="tag_input" class="label_input" placeholder="type in your tag" type="text">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        {% for tag in tags %}
+                            <button class="dropdown-item" type="button" title="{{ tag.description }}" onclick="select_tag(this)">
+                                {{ tag.name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
         </div>
 
         <div class="row form-group">
-            <label for="poll_description">Poll description</label>
-            <textarea class="form-control" rows="5" id="poll_description"></textarea>
+            <div class="col-md-10">
+                <label for="poll_description">Poll description</label>
+                <textarea placeholder="..." class="form-control" rows="5" id="poll_description"></textarea>
+            </div>
         </div>
 
         <div class="row">
-            <input id="file_input" type="file" accept=".css" class="form-control-file border btn custom_btn">
+            <div class="col-md-10">
+                <input id="file_input" type="file" accept=".css" class="form-control-file border btn custom_btn">
+            </div>
         </div>
 
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-end mt-5">
             <button type="button" class="btn add_button" onclick="add_question()">
                 Add question
             </button>
@@ -37,11 +61,14 @@
 
     <div id="questions"></div>
 
-    <div class="row justify-content-center mt-5">
-        <button class="btn add_button" id="submit_btn">
-            Submit
-        </button>
+    <div class="container">
+        <div class="row justify-content-end mt-5">
+            <button class="btn add_button" id="submit_btn" style="display: none">
+                Submit
+            </button>
+        </div>
     </div>
+
 </form>
 
 
@@ -110,7 +137,7 @@
     <div class="row form-check" style="margin-left: 20px">
         <div class="col-md-3">
             <label class="form-check-label">
-                <input disabled type="checkbox" class="form-check-input" value=""><input required class="label_input" placeholder="type in your label" type="text">
+                <input checked disabled type="checkbox" class="form-check-input" value=""><input required class="label_input" placeholder="type in your label" type="text">
             </label>
         </div>
         <div class="col-md-9">
@@ -123,7 +150,7 @@
     <div class="row form-check" style="margin-left: 20px">
         <div class="col-md-3">
             <label class="form-check-label">
-                <input disabled type="radio" class="form-check-input" name="optradio"><input required class="label_input" placeholder="type in your label" type="text">
+                <input checked disabled type="radio" class="form-check-input" name="optradio"><input required class="label_input" placeholder="type in your label" type="text">
             </label>
         </div>
         <div class="col-md-9">
@@ -142,7 +169,7 @@
         </div>
     </div>
     <div class="row">
-        <input disabled type="text" class="col-md-9 ml-5 form-control mt-1" id="usr">
+        <input placeholder="Here will be text answers" disabled type="text" class="col-md-9 ml-5 form-control mt-1" id="usr">
     </div>
 </div>
 

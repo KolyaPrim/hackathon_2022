@@ -18,11 +18,15 @@ window.add_question = function () {
     // $(`#question_${new_el_id} .checkbox_container .remove_var_btn`).attr('id', `${new_el_id}_checkbox_0`)
     // $(`#question_${new_el_id} .text_container .remove_var_btn`).attr('id', `${new_el_id}_text_0`)
     new_question.css({'display': 'block'})
+    $('#submit_btn').css({'display': 'block'})
 }
 
 window.remove_question = function (e) {
     let id_el_to_delete = e.id.split('_')[2]
     $(`#question_${id_el_to_delete}`).remove()
+    if ($('#questions').children().length === 0) {
+        $('#submit_btn').css({'display': 'none'})
+    }
 
 }
 
@@ -80,6 +84,7 @@ function submit () {
         let question_obj = {}
         let question_id = question.id
         question_obj['text'] = $(`#${question_id} .question_text`)[0].value
+        question_obj['tag'] = $('#tag_input').val()
         try {
             question_obj['description'] = $(`#${question_id} .description_container textarea`)[0].value
         }
@@ -162,4 +167,8 @@ function post(data) {
             console.log(errmsg)
         }
     })
+}
+
+window.select_tag = function (el) {
+    $('#tag_input').val(el.innerHTML)
 }
