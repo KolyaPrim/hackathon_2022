@@ -30,8 +30,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         {% for tag in tags %}
-                            <button class="dropdown-item" type="button" title="{{ tag.description }}" onclick="select_tag(this)">
-                                {{ tag.name }}</button>
+                            <button class="dropdown-item" type="button" title="{{ tag.description }}" onclick="select_tag(this)">{{ tag.name }}</button>
                         {% endfor %}
                     </div>
                 </div>
@@ -150,7 +149,7 @@
     <div class="row form-check" style="margin-left: 20px">
         <div class="col-md-3">
             <label class="form-check-label">
-                <input checked disabled type="radio" class="form-check-input" name="optradio"><input required class="label_input" placeholder="type in your label" type="text">
+                <input disabled type="radio" class="form-check-input" name="optradio"><input required class="label_input" placeholder="type in your label" type="text">
             </label>
         </div>
         <div class="col-md-9">
@@ -174,5 +173,5 @@
 </div>
 
 
-<script type="module" src="{% static 'js/your_pollls/polls_create.js' %}"></script>
+<script type="module" src="{% static 'js/your_polls/polls_create.js' %}"></script>
 {% endblock %}

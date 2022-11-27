@@ -3,4 +3,6 @@ djangorestframework==3.14.0
 django-allauth==0.51.0
 django_plotly_dash==2.1.0
 dash==2.6.2
+django_plotly_dash==2.1.0
+pandas
 numpy==1.23.4

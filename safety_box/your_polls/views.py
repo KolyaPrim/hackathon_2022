@@ -1,18 +1,10 @@
-import datetime
 import json
-import logging
-
-import importlib
 import os
 import time
-import traceback
-
-from django.db.models import Q
-from django.http import JsonResponse, Http404
-from django.shortcuts import get_object_or_404, redirect
-from rest_framework import viewsets, permissions
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import viewsets
 from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
-from rest_framework.request import Request
 from rest_framework.response import Response
 import hashlib
 from .models import *
@@ -33,7 +25,8 @@ class PollViewSet(viewsets.ViewSet):
             template_name='polls_list.html')
 
     def create_poll(self, request):
-        return Response(template_name='poll_creating_page.html')
+        tags = Tag.objects.all()
+        return Response(template_name='poll_creating_page.html', data={'tags': tags})
 
     def get_poll(self, request, poll_id: int):
         poll: Poll = get_object_or_404(Poll, id=poll_id)
@@ -81,12 +74,20 @@ class PollsOperatingObjectApi(viewsets.ViewSet):
         now = time.time()
         token = hashlib.md5(str(now).encode('utf-8')).hexdigest()
 
+        tag_name = data.get('tag')
+        tag = Tag.objects.filter(name=tag_name)
+        if not tag:
+            tag = Tag(name=tag_name)
+            tag.save()
+        else:
+            tag = tag[0]
+
         poll_obj = Poll(title=data.get('title'),
                         description=data.get('description', ''),
                         author=request.user,
-                        css_file=data.get('poll_css'),
+                        css_file=request.FILES['poll_css'],
                         token=token,
-                        tag_id=data.get('tag'))
+                        tag_id=tag.id)
         poll_obj.save()
 
         questions = data.get('questions')

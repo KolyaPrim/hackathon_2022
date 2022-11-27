@@ -77,14 +77,14 @@ function submit () {
     let result = {
         'title': $('#poll_name')[0].value,
         'description': $('#poll_description')[0].value,
-        'questions': []
+        'questions': [],
+        'tag': $('#tag_input').val()
     }
     let questions = $('#questions').children()
     questions.each(function (q_id, question) {
         let question_obj = {}
         let question_id = question.id
         question_obj['text'] = $(`#${question_id} .question_text`)[0].value
-        question_obj['tag'] = $('#tag_input').val()
         try {
             question_obj['description'] = $(`#${question_id} .description_container textarea`)[0].value
         }
