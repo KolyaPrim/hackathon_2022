@@ -75,13 +75,13 @@ function submit () {
         'description': $('#poll_description')[0].value,
         'questions': []
     }
-    let questions = $('#questions').children().slice(1,)
+    let questions = $('#questions').children()
     questions.each(function (q_id, question) {
         let question_obj = {}
         let question_id = question.id
         question_obj['text'] = $(`#${question_id} .question_text`)[0].value
         try {
-            question_obj['description'] = $(`#${question_id} .description_container textarea`).slice(1,)[0].value
+            question_obj['description'] = $(`#${question_id} .description_container textarea`)[0].value
         }
         catch (e) {
             console.log(e)
@@ -89,21 +89,21 @@ function submit () {
 
         question_obj['variants'] = []
 
-        $(`#${question_id} .checkbox_container`).children().slice(1,).each(function (v_id, variant) {
+        $(`#${question_id} .checkbox_container`).children().each(function (v_id, variant) {
             let ch_id = variant.id
             let check_box_obj = {}
             check_box_obj['label'] = $(`#${question_id} .checkbox_container #${ch_id} .label_input`)[0].value
             check_box_obj['type'] = 'checkbox'
             question_obj['variants'].push(check_box_obj)
         })
-        $(`#${question_id} .radio_container`).children().slice(1,).each(function (v_id, variant) {
+        $(`#${question_id} .radio_container`).children().each(function (v_id, variant) {
             let rad_id = variant.id
             let radio_obj = {}
             radio_obj['label'] = $(`#${question_id} .radio_container #${rad_id} .label_input`)[0].value
             radio_obj['type'] = 'radio'
             question_obj['variants'].push(radio_obj)
         })
-        $(`#${question_id} .text_container`).children().slice(1,).each(function (v_id, variant) {
+        $(`#${question_id} .text_container`).children().each(function (v_id, variant) {
             let text_id = variant.id
             let text_obj = {}
             text_obj['label'] = $(`#${question_id} .text_container #${text_id} .label_input`)[0].value
