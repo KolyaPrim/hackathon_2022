@@ -55,7 +55,8 @@ class PollsAPIViewSet(viewsets.ViewSet):
     def answer(self, request: Request) -> Response:
         answers = json.loads(dict(request.data)['inputs_data'][0])
         time_hash = hashlib.md5(str(time.time()).encode('utf-8')).hexdigest()
-        user_hash = UserHash(user_hash=time_hash).save()
+        user_hash = UserHash(user_hash=time_hash)
+        user_hash.save()
         for answer in answers:
             Answer(value=answer["value"], variant_id=answer["id"], user_hash=user_hash).save()
             pass

@@ -71,7 +71,6 @@ class PollsOperatingObjectApi(viewsets.ViewSet):
     renderer_classes = [JSONRenderer]
 
     def save_poll(self, request):
-        # data = request.data
         data = json.loads(dict(request.data)['data'][0])
 
         now = time.time()
