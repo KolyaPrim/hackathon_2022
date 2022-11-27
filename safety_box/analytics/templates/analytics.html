@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load plotly_dash %}
+{% block title %} YourPolls {% endblock %}
+{% block content %}
+    <div class="container align mt-3 flex-grow-1">
+        {% plotly_header %}
+        {% plotly_direct name=analytics_app %}
+        {% plotly_footer %}
+    </div>
+{% endblock %}

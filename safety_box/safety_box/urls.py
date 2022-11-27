@@ -18,10 +18,12 @@ from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("django_plotly_dash/", include("django_plotly_dash.urls")),
     path('', include('your_polls.urls')),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
     path('api/', include('polls_api.urls')),
+    path('analytics/', include('analytics.urls')),
     *([
           re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
           re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "django_plotly_dash.apps.DjangoPlotlyDashConfig",
     'rest_framework',
 
     "allauth",
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_plotly_dash.middleware.BaseMiddleware'
 ]
 
 ROOT_URLCONF = 'safety_box.urls'
@@ -66,7 +68,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, "templates"),
                  os.path.join(BASE_DIR, "your_polls", "templates"),
-                 os.path.join(BASE_DIR, "polls_api", "templates")],
+                 os.path.join(BASE_DIR, "polls_api", "templates"),
+                 os.path.join(BASE_DIR, "analytics", "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
