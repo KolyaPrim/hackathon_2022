@@ -62,6 +62,8 @@
             {% csrf_token %}
             <button type="submit" class="btn btn-light">Login</button>
         </form>
+
+
     {% endif %}
 </nav>
 
@@ -70,6 +72,8 @@
         {% csrf_token %}
         {% block content %}
         {% endblock %}
+    {% else %}
+        <div class="main_page_login">Hello! Please log via Google</div>
     {% endif %}
 </main>
 <footer class="page-footer font-small bg-light mt-4">
