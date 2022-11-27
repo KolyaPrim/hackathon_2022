@@ -1,4 +1,5 @@
 import datetime
+import json
 import logging
 
 import importlib
@@ -70,12 +71,17 @@ class PollsOperatingObjectApi(viewsets.ViewSet):
     renderer_classes = [JSONRenderer]
 
     def save_poll(self, request):
-        data = request.data
+        # data = request.data
+        data = json.loads(dict(request.data)['data'][0])
 
         now = time.time()
         token = hashlib.md5(str(now).encode('utf-8')).hexdigest()
 
-        poll_obj = Poll(title=data.get('title'), description=data.get('description', ''), token=token, author=request.user)
+        poll_obj = Poll(title=data.get('title'),
+                        description=data.get('description', ''),
+                        author=request.user,
+                        css_file=data.get('poll_css'),
+                        token=token)
         poll_obj.save()
 
         questions = data.get('questions')
