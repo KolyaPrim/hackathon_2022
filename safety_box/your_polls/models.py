@@ -8,12 +8,18 @@ from analytics.models import UserHash
 User = get_user_model()
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField(blank=True)
+
+
 class Poll(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     css_file = models.FileField(upload_to='polls_styles/', default='')
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     token = models.CharField(max_length=200)
+    tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, blank=True, null=True)
 
 
 class Question(models.Model):
