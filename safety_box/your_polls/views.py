@@ -3,15 +3,18 @@ import json
 import logging
 
 import importlib
+import os
+import time
 import traceback
 
 from django.db.models import Q
 from django.http import JsonResponse, Http404
 from django.shortcuts import get_object_or_404, redirect
 from rest_framework import viewsets, permissions
-from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 from rest_framework.request import Request
 from rest_framework.response import Response
+import hashlib
 from .models import *
 
 
@@ -63,13 +66,21 @@ class PollViewSet(viewsets.ViewSet):
         return Response(data={'poll': poll_data},
                         template_name='poll_page.html')
 
+
+class PollsOperatingObjectApi(viewsets.ViewSet):
+    renderer_classes = [JSONRenderer]
+
     def save_poll(self, request):
         # data = request.data
         data = json.loads(dict(request.data)['data'][0])
+        now = time.time()
+        token = hashlib.md5(str(now).encode('utf-8')).hexdigest()
+
         poll_obj = Poll(title=data.get('title'),
                         description=data.get('description', ''),
                         author=request.user,
-                        css_file=data.get('poll_css'))
+                        css_file=data.get('poll_css'),
+                        token=token)
         poll_obj.save()
 
         questions = data.get('questions')
@@ -91,3 +102,11 @@ class PollViewSet(viewsets.ViewSet):
                 variant_obj.save()
 
         return redirect("/poll/" + str(poll_obj.id) + "/")
+
+    def delete_poll(self, request, poll_id: int):
+        poll: Poll = get_object_or_404(Poll, id=poll_id)
+        if os.path.exists(poll.css_file.path):
+            os.remove(path=poll.css_file.path)
+        poll.delete()
+
+        return JsonResponse({})

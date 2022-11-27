@@ -7,11 +7,12 @@ from django.views.static import serve
 from django.contrib.auth.views import LogoutView
 from django.views.generic import TemplateView
 
-from .views import PollViewSet
+from .views import PollViewSet, PollsOperatingObjectApi
 
 urlpatterns = [
     path('', PollViewSet.as_view({'get': 'get_poll_list'})),
     path('poll/<int:poll_id>/', PollViewSet.as_view({'get': 'get_poll'})),
     path('creating_poll/', PollViewSet.as_view({'get': 'create_poll'})),
-    path('save_poll/', PollViewSet.as_view({'post': 'save_poll'})),
+    path('save_poll/', PollsOperatingObjectApi.as_view({'get': 'save_poll'})),
+    path('poll/delete/<int:poll_id>/', PollsOperatingObjectApi.as_view({'post': 'delete_poll'})),
 ]
