@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %} {{ report.name }} {% endblock %}
 {% block content %}
-<script type="module" src="{% static 'js/your_pollls/polls_create.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/your_polls/polls_create.css' %}">
 {% csrf_token %}
 <form id="poll_create_form">
@@ -30,121 +29,123 @@
         </div>
 
         <div class="row justify-content-center mt-5">
-            <button type="button" class="btn" id="add_button" onclick="add_question()">
+            <button type="button" class="btn add_button" onclick="add_question()">
                 Add question
             </button>
         </div>
     </div>
 
-    <div id="questions">
-        <div id="question_0" class="container form-group question-container" style="display: none">
+    <div id="questions"></div>
 
-            <div class="row justify-content-end">
-                <button id="remove_btn_0" type="button" class="btn custom_btn mr-3" onclick="remove_question(this)">╳</button>
-            </div>
-
-            <div class="row" style="padding: 20px">
-                <div class="col">
-                    <div class="row">
-
-                        <div class="col mt-3">
-                            <label for="usr">Text of your question</label>
-                            <input type="text" class="form-control question_text" placeholder="... ?" id="usr">
-                        </div>
-
-                    </div>
-
-                    <div class="row col justify-content-center mt-2" style="margin: auto">
-                        <div class="btn-group">
-                            <button id="description_btn_0" type="button" class="btn custom_btn" onclick="add_variant(this)">Description</button>
-                            <button id="radio_btn_0" type="button" class="btn custom_btn" onclick="add_variant(this)">Radio</button>
-                            <button id="checkbox_btn_0" type="button" class="btn custom_btn" onclick="add_variant(this)">CheckBox</button>
-                            <button id="text_btn_0" type="button" class="btn custom_btn" onclick="add_variant(this)">Text field</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <hr class="divider" style="display: none">
-
-            <div class="variant_containers">
-                <div class="description_container">
-                    <div id="input_description_0" class="row input_row input_description" style="display: none">
-                        <div class="col form-check">
-                            <div class="mt-3">
-                                <div class="row">
-                                    <label class="col-md-2" for="comment" style="margin: auto;">Question description</label>
-                                    <div class="col-md-10" style="padding: 5px">
-                                        <div>
-                                            <button id="0_description_0" class="btn custom_btn remove_var_btn" onclick="delete_variant(this)">x</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <textarea class="form-control" rows="5" id="comment" placeholder="Make sure the question will be understood correctly..."></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="checkbox_container">
-                    <div id="input_checkbox_0" class="row input_row input_checkbox" style="display: none">
-                        <div class="row form-check" style="margin-left: 20px">
-                            <div class="col-md-3">
-                                <label class="form-check-label">
-                                    <input disabled type="checkbox" class="form-check-input" value=""><input class="label_input" placeholder="type in your label" type="text">
-                                </label>
-                            </div>
-                            <div class="col-md-9">
-                                <button id="0_checkbox_0" class="btn custom_btn remove_var_btn" onclick="delete_variant(this)">x</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="radio_container">
-                    <div id="input_radio_0" class="row input_row input_radio" style="display: none">
-                        <div class="row form-check" style="margin-left: 20px">
-                            <div class="col-md-3">
-                                <label class="form-check-label">
-                                    <input disabled type="radio" class="form-check-input" name="optradio"><input class="label_input" placeholder="type in your label" type="text">
-                                </label>
-                            </div>
-                            <div class="col-md-9">
-                                <button id="0_radio_0" class="btn custom_btn remove_var_btn" onclick="delete_variant(this)">x</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text_container">
-                    <div id="input_text_0" class="row input_row input_text_field" style="display: none">
-                        <div class="row form-check" style="margin-left: 20px">
-                            <div class="col-md-3">
-                                <input class="label_input" placeholder="type in your label" type="text">
-                            </div>
-                            <div class="col-md-9">
-                                <button id="0_text_0" class="btn custom_btn remove_var_btn" onclick="delete_variant(this)">x</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <input disabled type="text" class="col-md-9 ml-5 form-control mt-1" id="usr">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
     <div class="row justify-content-center mt-5">
-        <button type="button" class="btn" id="add_button" onclick="submit()">
+        <button class="btn add_button" id="submit_btn">
             Submit
         </button>
     </div>
 </form>
 
 
+
+
+
+<div id="question_0" class="container form-group question-container" style="display: none">
+
+    <div class="row justify-content-end">
+        <button id="remove_btn_0" type="button" class="btn custom_btn mr-3" onclick="remove_question(this)">╳</button>
+    </div>
+
+    <div class="row" style="padding: 20px">
+        <div class="col">
+            <div class="row">
+
+                <div class="col mt-3">
+                    <label for="usr">Text of your question</label>
+                    <input required type="text" class="form-control question_text" placeholder="..." id="usr">
+                </div>
+
+            </div>
+
+            <div class="row col justify-content-center mt-2" style="margin: auto">
+                <div class="btn-group">
+                    <button id="description_btn_0" type="button" class="btn custom_btn" onclick="add_variant(this)">Description</button>
+                    <button id="radio_btn_0" type="button" class="btn custom_btn" onclick="add_variant(this)">Radio</button>
+                    <button id="checkbox_btn_0" type="button" class="btn custom_btn" onclick="add_variant(this)">CheckBox</button>
+                    <button id="text_btn_0" type="button" class="btn custom_btn" onclick="add_variant(this)">Text field</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr class="divider" style="display: none">
+
+    <div class="variant_containers">
+        <div class="description_container"></div>
+
+        <div class="checkbox_container"></div>
+
+        <div class="radio_container"></div>
+
+        <div class="text_container"></div>
+    </div>
+</div>
+
+
+<div id="input_description_0" class="row input_row input_description" style="display: none">
+    <div class="col form-check">
+        <div class="mt-3">
+            <div class="row">
+                <label class="col-md-2" for="comment" style="margin: auto;">Question description</label>
+                <div class="col-md-10" style="padding: 5px">
+                    <div>
+                        <button id="0_description_0" class="btn custom_btn remove_var_btn" onclick="delete_variant(this)">x</button>
+                    </div>
+                </div>
+            </div>
+            <textarea required class="form-control" rows="5" id="comment" placeholder="Make sure the question will be understood correctly..."></textarea>
+        </div>
+    </div>
+</div>
+
+<div id="input_checkbox_0" class="row input_row input_checkbox" style="display: none">
+    <div class="row form-check" style="margin-left: 20px">
+        <div class="col-md-3">
+            <label class="form-check-label">
+                <input disabled type="checkbox" class="form-check-input" value=""><input required class="label_input" placeholder="type in your label" type="text">
+            </label>
+        </div>
+        <div class="col-md-9">
+            <button id="0_checkbox_0" class="btn custom_btn remove_var_btn" onclick="delete_variant(this)">x</button>
+        </div>
+    </div>
+</div>
+
+<div id="input_radio_0" class="row input_row input_radio" style="display: none">
+    <div class="row form-check" style="margin-left: 20px">
+        <div class="col-md-3">
+            <label class="form-check-label">
+                <input disabled type="radio" class="form-check-input" name="optradio"><input required class="label_input" placeholder="type in your label" type="text">
+            </label>
+        </div>
+        <div class="col-md-9">
+            <button id="0_radio_0" class="btn custom_btn remove_var_btn" onclick="delete_variant(this)">x</button>
+        </div>
+    </div>
+</div>
+
+<div id="input_text_0" class="row input_row input_text_field" style="display: none">
+    <div class="row form-check" style="margin-left: 20px">
+        <div class="col-md-3">
+            <input required class="label_input" placeholder="type in your label" type="text">
+        </div>
+        <div class="col-md-9">
+            <button id="0_text_0" class="btn custom_btn remove_var_btn" onclick="delete_variant(this)">x</button>
+        </div>
+    </div>
+    <div class="row">
+        <input disabled type="text" class="col-md-9 ml-5 form-control mt-1" id="usr">
+    </div>
+</div>
+
+
+<script type="module" src="{% static 'js/your_pollls/polls_create.js' %}"></script>
 {% endblock %}

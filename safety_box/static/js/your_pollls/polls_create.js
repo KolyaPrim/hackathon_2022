@@ -2,7 +2,7 @@ window.add_question = function () {
     let new_question = $('#question_0').clone()
     let questions = $('#questions')
 
-    let new_el_id = questions.children().length
+    let new_el_id = questions.children().length + 1
     new_question.attr('id', `question_${new_el_id}`)
     questions.append(new_question)
 
@@ -31,12 +31,12 @@ window.add_variant = function (e) {
     let type = e.id.split('_')[0]
     let question_id = e.id.split('_')[2]
     let container_selector = `#question_${question_id} .${type}_container`
-    let new_variant_id = $(container_selector).children().length
+    let new_variant_id = $(container_selector).children().length + 1
 
     // $("#question_1 hr").css({'display': 'block'})
 
     if (!(type === 'description' && new_variant_id > 1)) {
-        let new_el = $(`#question_0 #input_${type}_0`).clone()
+        let new_el = $(`#input_${type}_0`).clone()
         new_el.attr('id', `input_${type}_${new_variant_id}`)
         new_el.css({'display': 'block'})
         $(`${container_selector}`).append(new_el)
@@ -60,7 +60,16 @@ window.delete_variant = function (e) {
     $(`#question_${question_id} #input_${type}_${var_id}`).remove()
 }
 
-window.submit = function () {
+$('#submit_btn').click(function (e) {
+    e.preventDefault()
+    let if_required_fields_filled = document.getElementById('poll_create_form').reportValidity()
+    let if_there_are_any_questions = Boolean($('#questions').children().length)
+    if (if_required_fields_filled && if_there_are_any_questions) {
+        submit()
+    }
+})
+
+function submit () {
     let result = {
         'title': $('#poll_name')[0].value,
         'description': $('#poll_description')[0].value,
@@ -109,49 +118,49 @@ window.submit = function () {
 }
 
 function post(data) {
-    document.getElementById('poll_create_form').reportValidity()
-    // let csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
-    // let form_data = new FormData();
-    // // for (const [key, value] of Object.entries(data)) {
-    // //     form_data.append(key, value);
-    // // }
-    // form_data.append('data', JSON.stringify(data));
-    // for ( let file of $('#file_input')[0].files) {
-    //     form_data.append('poll_css', file, data['title.css']);
+
+    let csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+    let form_data = new FormData();
+    // for (const [key, value] of Object.entries(data)) {
+    //     form_data.append(key, value);
     // }
-    // $.ajax({
-    //     // url: '/save_poll/',
-    //     // headers: {
-    //     //     'Content-type': 'application/json',
-    //     //     'Accept': 'application/json',
-    //     //     'X-CSRFToken': csrf
-    //     // },
-    //     // data: form_data,
-    //     // files: $('#file_input')[0].files,
-    //     // type: 'POST',
-    //     // processData: false,  // tell jQuery not to process the data
-    //     // contentType: false,
-    //
-    //     type: "POST",
-    //     url: '/save_poll/',
-    //     headers: {
-    //         // 'Content-type': 'application/json',
-    //         // 'Accept': 'application/json',
-    //         'X-CSRFToken': csrf
-    //     },
-    //     data: form_data,
-    //     // data: {"inputs_data": JSON.stringify(data),
-    //     // 'files':$('#file_input')[0].files},
-    //     contentType: false,
-    //     processData: false,
-    //     cache: false,
-    //
-    //     success: function (data) {
-    //         console.log('success')
-    //         console.log(data)
-    //     },
-    //     error: function (xhr, errmsg, err) {
-    //         console.log(errmsg)
-    //     }
-    // })
+    form_data.append('data', JSON.stringify(data));
+    for ( let file of $('#file_input')[0].files) {
+        form_data.append('poll_css', file, data['title.css']);
+    }
+    $.ajax({
+        // url: '/save_poll/',
+        // headers: {
+        //     'Content-type': 'application/json',
+        //     'Accept': 'application/json',
+        //     'X-CSRFToken': csrf
+        // },
+        // data: form_data,
+        // files: $('#file_input')[0].files,
+        // type: 'POST',
+        // processData: false,  // tell jQuery not to process the data
+        // contentType: false,
+
+        type: "POST",
+        url: '/save_poll/',
+        headers: {
+            // 'Content-type': 'application/json',
+            // 'Accept': 'application/json',
+            'X-CSRFToken': csrf
+        },
+        data: form_data,
+        // data: {"inputs_data": JSON.stringify(data),
+        // 'files':$('#file_input')[0].files},
+        contentType: false,
+        processData: false,
+        cache: false,
+
+        success: function (data) {
+            console.log('success')
+            console.log(data)
+        },
+        error: function (xhr, errmsg, err) {
+            console.log(errmsg)
+        }
+    })
 }
