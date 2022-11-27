@@ -156,8 +156,6 @@ function post(data) {
         cache: false,
 
         success: function (data) {
-            console.log('success')
-            console.log(data)
             window.location.replace("/poll/" + data + "/")
         },
         error: function (xhr, errmsg, err) {
