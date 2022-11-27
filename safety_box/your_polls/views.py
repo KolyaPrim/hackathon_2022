@@ -101,7 +101,7 @@ class PollsOperatingObjectApi(viewsets.ViewSet):
                                       question=question_obj)
                 variant_obj.save()
 
-        return redirect("/poll/" + str(poll_obj.id) + "/")
+        return Response(poll_obj.id)
 
     def delete_poll(self, request, poll_id: int):
         poll: Poll = get_object_or_404(Poll, id=poll_id)
