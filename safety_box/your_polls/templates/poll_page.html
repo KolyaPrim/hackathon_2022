@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static  'css/poll_list.css' %}">
 
     <div class="container flex-grow-1 d-flex iframe_block">
-        <iframe src="/api/{{ poll.token }}/" class="container-fluid custom_iframe">
+        <iframe src="/api/{{ poll.token }}/" class="container-fluid custom_iframe" style="height: auto;">
         </iframe>
     </div>
 

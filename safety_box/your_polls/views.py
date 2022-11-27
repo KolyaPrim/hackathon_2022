@@ -84,13 +84,17 @@ class PollsOperatingObjectApi(viewsets.ViewSet):
             tag.save()
         else:
             tag = tag[0]
-
+        file = request.FILES.getlist("poll_css")
+        if file:
+            file = {"css_file": file[0]}
+        else:
+            file = {}
         poll_obj = Poll(title=data.get('title'),
                         description=data.get('description', ''),
                         author=request.user,
-                        css_file=request.FILES['poll_css'],
                         token=token,
-                        tag_id=tag.id)
+                        tag_id=tag.id,
+                        **file)
         poll_obj.save()
 
         questions = data.get('questions')
