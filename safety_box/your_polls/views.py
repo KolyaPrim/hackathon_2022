@@ -64,6 +64,9 @@ class PollViewSet(viewsets.ViewSet):
         return Response(data={'poll': poll_data},
                         template_name='poll_page.html')
 
+    def get_test(self,request):
+        return Response(template_name='test_serv.html')
+
 
 class PollsOperatingObjectApi(viewsets.ViewSet):
     renderer_classes = [JSONRenderer]

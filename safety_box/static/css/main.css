@@ -5,17 +5,25 @@ body {
 }
 
 .navbar {
-    border-bottom: 0.5px solid rgba(0,0,0,0.15);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
 }
 
 .page-footer {
-    border-top: 0.5px solid rgba(0,0,0,0.15);;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.15);;
 }
 
 main {
     flex-flow: column;
 }
 
+.main_page_login {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    width: 100vw;
+    font-size: 3rem;
+    transform: translate(0, -50%);
+}
 ::-webkit-scrollbar {
     width: 10px;
     border-radius: 10px;

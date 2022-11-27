@@ -75,6 +75,8 @@ button {
 
 .custom_iframe {
     border: none;
+    height: 100%;
+
 }
 
 .controls_btn {
