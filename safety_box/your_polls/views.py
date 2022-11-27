@@ -85,7 +85,8 @@ class PollsOperatingObjectApi(viewsets.ViewSet):
                         description=data.get('description', ''),
                         author=request.user,
                         css_file=data.get('poll_css'),
-                        token=token)
+                        token=token,
+                        tag_id=data.get('tag'))
         poll_obj.save()
 
         questions = data.get('questions')
