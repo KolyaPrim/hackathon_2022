@@ -7,11 +7,8 @@
 
     <div class="container flex-grow-1 align-items-center d-flex">
 
-        <div class="main_space w-100">
-            <div class="row main_block">
-
-            </div>
-            <div class="row main_block">
+        <div class="main_space w-100 d-flex">
+            <div class="row main_block flex-grow-1">
                 <div class="col-md-4 list_element d-flex align-items-center justify-content-center">
                     <div class="main_block_btn">
                         Here your created polls
@@ -27,9 +24,25 @@
 
                 </div>
                 <div class="col-md-8 list_element">
+
                     <div class="list_block">
-                        {% for item in polls %}
-                            {% include item_template with item=item %}
+                        {% for tag in tag_list %}
+                            <div class="block_tag">
+                                {% if tag %}
+                                    <div>{{ tag.name }}</div>
+                                    <div style="font-size: 0.8rem;">{{ tag.description }}</div>
+                                {% else %}
+                                    <div>Not specified tag</div>
+                                    <div style="font-size: 0.8rem;">Your can add it in settings</div>
+                                {% endif %}
+                            </div>
+                            {% for item in polls %}
+                                {% if item.tag == tag %}
+                                    {% include item_template with item=item %}
+
+                                {% endif %}
+                            {% endfor %}
+
                         {% endfor %}
                     </div>
                 </div>
