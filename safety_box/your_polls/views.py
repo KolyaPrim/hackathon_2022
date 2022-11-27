@@ -40,6 +40,7 @@ class PollViewSet(viewsets.ViewSet):
             css_file = None
         poll_data = {
             'id': poll.id,
+            'token':poll.token,
             "title": poll.title,
             "description": poll.description or "",
             "css_file": css_file,
@@ -105,8 +106,10 @@ class PollsOperatingObjectApi(viewsets.ViewSet):
 
     def delete_poll(self, request, poll_id: int):
         poll: Poll = get_object_or_404(Poll, id=poll_id)
-        if os.path.exists(poll.css_file.path):
+        try:
             os.remove(path=poll.css_file.path)
+        except:
+            pass
         poll.delete()
 
         return JsonResponse({})

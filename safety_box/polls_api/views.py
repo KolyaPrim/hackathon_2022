@@ -18,7 +18,7 @@ class PollsViewSet(viewsets.ViewSet):
 
     @xframe_options_exempt
     def get_poll(self, request: Request, token: str) -> Response:
-        poll: Poll = get_object_or_404(Poll, id=int(token))
+        poll: Poll = get_object_or_404(Poll, token=token)
         PollsGet(poll=poll).save()
         poll_data = {
             "title": poll.title,
