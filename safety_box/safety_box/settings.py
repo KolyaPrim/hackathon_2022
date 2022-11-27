@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
 
     'your_polls',
-    'polls_api'
+    'polls_api',
+    'analytics'
 ]
 
 MIDDLEWARE = [

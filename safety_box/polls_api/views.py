@@ -1,4 +1,6 @@
+import hashlib
 import json
+import time
 
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -7,6 +9,7 @@ from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+from analytics.models import PollsGet, UserHash
 from your_polls.models import Poll, Variant, Question, Answer
 
 
@@ -16,6 +19,7 @@ class PollsViewSet(viewsets.ViewSet):
     @xframe_options_exempt
     def get_poll(self, request: Request, token: str) -> Response:
         poll: Poll = get_object_or_404(Poll, id=int(token))
+        PollsGet(poll=poll).save()
         poll_data = {
             "title": poll.title,
             "description": poll.description or "",
@@ -50,7 +54,9 @@ class PollsAPIViewSet(viewsets.ViewSet):
 
     def answer(self, request: Request) -> Response:
         answers = json.loads(dict(request.data)['inputs_data'][0])
+        time_hash = hashlib.md5(str(time.time()).encode('utf-8')).hexdigest()
+        user_hash = UserHash(user_hash=time_hash).save()
         for answer in answers:
-            Answer(value=answer["value"], variant_id=answer["id"]).save()
+            Answer(value=answer["value"], variant_id=answer["id"], user_hash=user_hash).save()
             pass
         return Response()

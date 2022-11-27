@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from datetime import datetime
 
+from analytics.models import UserHash
+
 # Create your models here.
 User = get_user_model()
 
@@ -32,3 +34,4 @@ class Answer(models.Model):
     variant = models.ForeignKey(Variant, on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_now_add=True)
     value = models.TextField()
+    user_hash = models.ForeignKey(UserHash, on_delete=models.CASCADE)
