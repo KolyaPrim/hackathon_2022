@@ -10,7 +10,7 @@
             <a href="/analytics/{{ item.id }}/">
                 <button class="controls_btn">Analytics</button>
             </a>
-            <button class="controls_btn" onclick="delete_poll({{ item.id }})">Delete</button>
+            <button class="controls_btn" onclick="delete_poll({{ item.id }},{{ tag.id }})">Delete</button>
         </div>
     </div>
     <div class="list_item_description">{{ item.description }}</div>

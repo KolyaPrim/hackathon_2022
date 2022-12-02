@@ -27,7 +27,7 @@
 
                     <div class="list_block">
                         {% for tag in tag_list %}
-                            <div class="block_tag">
+                            <div class="block_tag" id="block_tag_{{ tag.id }}">
                                 {% if tag %}
                                     <div>{{ tag.name }}</div>
                                     <div style="font-size: 0.8rem;">{{ tag.description }}</div>
@@ -35,13 +35,14 @@
                                     <div>Not specified tag</div>
                                     <div style="font-size: 0.8rem;">Your can add it in settings</div>
                                 {% endif %}
-                            </div>
-                            {% for item in polls %}
-                                {% if item.tag == tag %}
-                                    {% include item_template with item=item %}
+                                {% for item in polls %}
+                                    {% if item.tag == tag %}
+                                        {% include item_template with item=item tag=tag %}
 
-                                {% endif %}
-                            {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
 
                         {% endfor %}
                     </div>
